@@ -21,7 +21,7 @@
     </ul> 
 </div>
    @foreach ($review as $item)
-       <h5>Review by: {{$user->name}}</h5>
+       <h5>Review by: {{$item->user->name}}</h5>
        <h5>{{$item->comment}}</h5>
        <h5>Rate: {{$item->rate}}</h5><br><br>
 

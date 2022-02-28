@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Menu;
+use App\Models\Review;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ReviewController extends Controller
 {
@@ -15,9 +17,9 @@ class ReviewController extends Controller
      */
     public function index($menu_id)
     {
-        $user=Auth::user();
         $menu=Menu::find($menu_id);
         $review=$menu->reviews;
+        $user=Auth::user();
         return view('User.Review.review',compact('review','user','menu'));
     }
 
