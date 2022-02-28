@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\ReviewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,10 +34,9 @@ Route::get('/menu',[MenuController::class,'index'])->name('menu');
 Route::middleware(['auth','role_admin'])->group(function () {
     Route::get('/menu/add',[MenuController::class,'create'])->name('menu.add');
     Route::post('/menu/add',[MenuController::class,'store'])->name('menu.store');
-
     Route::get('/menu/edit/{id}',[MenuController::class,'edit'])->name('menu.edit');
     Route::post('/menu/update/{id}',[MenuController::class,'update'])->name('menu.update');
-
     Route::get('/menu/delete/{id}',[MenuController::class,'destroy'])->name('menu.delete');
 
 });
+Route::get('/menu/{id}/review',[ReviewController::class,'index'])->name('review');

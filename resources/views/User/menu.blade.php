@@ -26,10 +26,18 @@
                 </ul> 
                 @can('menu_delete')
                 <div class="card-body">
+                    {{-- @if (\Illuminate\Support\Facades\Auth::user())
+                    <a href="{{route('review',['id'=>$m->id])}}" class="card-link ">Review</a>
+                @endif --}}
                     <a href="{{route('menu.delete',['id'=>$m->id])}}" class="card-link">Delete</a>
                     <a href="{{route('menu.edit',['id'=>$m->id])}}" class="card-link">Edit</a>
                 </div>  
-                @endcan      
+                @endcan
+                {{-- @if (\Illuminate\Support\Facades\Auth::user())   --}}
+                <div class="card-body">
+                    <a href="{{route('review',['id'=>$m->id])}}" class="card-link bg-warning">Review</a>
+                </div>    
+                {{-- @endif       --}}
         </div>   
     @endforeach    
 @endsection
