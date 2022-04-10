@@ -5,6 +5,11 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\ReserveController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\TableController;
+use App\Http\Controllers\MenuImageController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +22,10 @@ use App\Http\Controllers\ReviewController;
 |
 */
 
-Route::get('/',[HomeController::class,'index'])->name('index');
+Route::get('/',function(){
+    return redirect()->route('index');
+});
+Route::get('/home',[HomeController::class,'index'])->name('index');
 
 Route::get('/register',[UserController::class,'registerView'])->name('register');
 Route::post('/register',[UserController::class,'register'])->name('register.store');
@@ -38,5 +46,28 @@ Route::middleware(['auth','role_admin'])->group(function () {
     Route::post('/menu/update/{id}',[MenuController::class,'update'])->name('menu.update');
     Route::get('/menu/delete/{id}',[MenuController::class,'destroy'])->name('menu.delete');
 
+    //adding multiple images
+    Route::get('/menu/{id}/images/add',[MenuImageController::class,'create'])->name('menu.images');
+    Route::post('/menu/{id}/images/add',[MenuImageController::class,'store'])->name('menu.images.store');
+
+    Route::get('/dashboard',[DashboardController::class,'home'])->name('dashboard');
+    Route::get('/dashboard/reservation/view',[DashboardController::class,'view'])->name('reservation.view');
+    Route::get('/dashboard/reservation/delete/{id}',[ReserveController::class,'destroy'])->name('reservation.delete');
+
+    
+    Route::get('/dashboard/table',[TableController::class,'index'])->name('dashboard.table');
+    Route::get('/dashboard/table/add',[TableController::class,'create'])->name('dashboard.table.add');
+    Route::post('/dashboard/table/add',[TableController::class,'store'])->name('dashboard.table.store');
+    Route::get('/dashboard/table/delete/{id}',[TableController::class,'destroy'])->name('dashboard.table.delete');
+
+
 });
+//needs to be cleaned up->>
 Route::get('/menu/{id}/review',[ReviewController::class,'index'])->name('review');
+Route::post('/menu/review/store/{menu_id}',[ReviewController::class,'store'])->name('review.store');
+
+Route::get('/reserve',[ReserveController::class,'index'])->name('reserve');
+Route::post('/reserve/store',[ReserveController::class,'store'])->name('reserve.store');
+Route::get('/reserve/store/confirmed',[ReserveController::class,'confirmedReserve'])->name('reserve.store.confirmed');
+
+

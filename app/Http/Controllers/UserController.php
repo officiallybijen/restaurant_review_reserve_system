@@ -20,7 +20,7 @@ class UserController extends Controller
         return redirect()->route('login');
     }
     public function loginView(){
-        return view('User.login');
+        return redirect()->back();
     }
     public function login(Request $request){
         $credentials = $request->validate([
@@ -29,7 +29,7 @@ class UserController extends Controller
         ]);
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate(); 
-            return redirect()->route('index');
+            return redirect()->back();
         }
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
@@ -37,6 +37,6 @@ class UserController extends Controller
     }
     public function logout(Request $request){
         $request->session()->flush();
-        return redirect()->route('index');
+        return redirect()->back();
     }
 }

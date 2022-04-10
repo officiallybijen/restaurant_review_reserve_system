@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Menu;
+use App\Models\Review;
 
 class MenuController extends Controller
 {
@@ -116,6 +117,7 @@ class MenuController extends Controller
      */
     public function destroy($id)
     {
+        Review::where('menu_id',$id)->delete();
         Menu::find($id)->delete();
         return redirect()->route('menu');
     }

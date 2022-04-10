@@ -17,7 +17,7 @@ class RoleAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::user()->is_admin){
+        if(Auth::user()->role==1){
         return $next($request);
         }else{
             return redirect()->route('menu');
